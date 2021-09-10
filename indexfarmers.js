@@ -34,11 +34,11 @@ app.get(apiversion + '/farmers',  function (req, res)  {
 //put farmers by Id
 app.put(apiversion + '/farmer/:farmerId',  function (req, res)  {  
 
-  var farmerId = Number(req.body.studentid);
-  var farmerName = req.body.studentName;
-  var farmerAddress = req.body.farmersAddress;
-  var farmerAge = Number(req.body.farmersAge);
-  var plantPictuer = req.body.plantPictuer;
+  var farmerId = Number(req.body.farmerId);
+  var farmerName = req.body.farmerName;
+  var farmerAddress = req.body.farmerAddress;
+  var farmerAge = Number(req.body.farmerAge);
+  var plantPicture = req.body.plantPicture;
 
 
   res.setHeader('Content-Type', 'application/json');
@@ -49,14 +49,14 @@ app.put(apiversion + '/farmer/:farmerId',  function (req, res)  {
   db.query(`UPDATE farmers 
             Set
                farmerId = ${farmerId},
-               farmerName = '${farmerName}'
-			   farmerAddress = '${farmerAddress}'
+               farmerName = '${farmerName}',
+			   farmerAddress = '${farmerAddress}',
 			   farmerAge = ${farmerAge},
-			   plantPictuer = '${plantPictuer}'
+			   plantPicture = '${plantPicture}'
 
 
   
-            where farmerId='${farmerId}';`,function (error, results, fields) {
+            where farmerId=${farmerId};`,function (error, results, fields) {
     if (error) throw error;
     return res.send({ error: false, message: ' Modified farmer' });
    });
@@ -84,7 +84,7 @@ app.delete(apiversion + '/farmer/:farmerId',  function (req, res)  {
 
 app.listen(port, function () {
 	console.log("Server is up and running...");
-  });
+});
 
 
 
